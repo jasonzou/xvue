@@ -7,11 +7,12 @@
 
 <script setup lang='ts'>
 import { NButton } from 'naive-ui'
-// const { generateTitle } = useLocalI18n()
-// const router = useRouter()
-// function goHome() {
-//   router.push('/')
-// }
+import { RouterLink, useRouter } from 'vue-router'
+
+const router = useRouter()
+function goHome() {
+  router.push('/')
+}
 </script>
 
 <template>
@@ -27,11 +28,18 @@ import { NButton } from 'naive-ui'
         <!-- {{ generateTitle('notfound.desc') }} -->
       </div>
       <div>
-        <NButton type="primary" size="large">
+        <NButton type="primary" size="large" @click="goHome">
           Go Home
           <!-- {{ generateTitle('notfound.back') }} -->
         </NButton>
       </div>
     </div>
+  </div>
+  <div v-for="(route, index) in router.options.routes" :key="index">
+    <ul>
+      <RouterLink :to="route.path">
+        <li>{{ route.name }}</li>
+      </RouterLink>
+    </ul>
   </div>
 </template>
