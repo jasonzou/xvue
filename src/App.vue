@@ -5,6 +5,7 @@
   last modified: 2024-12-02 10:40:13
  -------------------------------------------------------------------------->
 <script setup lang='ts'>
+import { NButton, NSpace } from 'naive-ui'
 </script>
 
 <template>
@@ -15,6 +16,17 @@
       <div text-4xl>
         Test UnoCSS
       </div>
+      <NSpace vertical>
+        <NButton type="primary" size="large">
+          Naive UI Button 1
+        </NButton>
+        <NButton type="primary" size="large">
+          Naive UI Button 2
+        </NButton>
+        <NButton type="primary" size="large">
+          Naive UI Button 3
+        </NButton>
+      </NSpace>
     </div>
   </div>
 </template>
