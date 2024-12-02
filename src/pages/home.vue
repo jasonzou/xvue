@@ -36,7 +36,7 @@ import { NButton, NIcon, NSpace } from 'naive-ui'
         <GameControllerOutline /> --vicons
       </NIcon>
       <NIcon size="40">
-        <SvgIcon name="hamburger-opened" /> - from local svg icons
+        <SvgIcon name="hamburger-closed" /> - from local svg icons
       </NIcon>
       <NIcon size="40">
         <SvgIcon name="mdi:home" />--iconify
