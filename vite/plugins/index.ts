@@ -1,11 +1,10 @@
 import type { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
-// import vueJsx from '@vitejs/plugin-vue-jsx'
-// import setupAutoImport from './auto-import'
-// import setupComponents from './components'
-// import setupSvgIcon from './svg-icon'
-// import setupIcons from './icon'
+import setupAutoImport from './auto-import'
+import setupComponents from './components'
+import setupSvgIcon from './svg-icon'
+import setupIcons from './icon'
 // import setupMock from './mock'
 // import setupCompression from './compression'
 
@@ -13,11 +12,10 @@ export default function setupVitePlugins(viteEnv: Record<string, string>, isBuil
   const { VITE_USE_MOCK, VITE_BUILD_COMPRESS } = viteEnv
   const plugins: PluginOption[] =[vue(), UnoCSS()]
 
-//   const plugins: PluginOption[] = [vue(), vueJsx(), UnoCSS()]
-//   plugins.push(setupAutoImport())
-//   plugins.push(setupComponents())
-//   plugins.push(setupIcons())
-//   plugins.push(setupSvgIcon(isBuild))
+  plugins.push(setupAutoImport())
+  plugins.push(setupComponents())
+  plugins.push(setupIcons())
+  plugins.push(setupSvgIcon())
 //   if (isBuild) {
 //     const compressList = VITE_BUILD_COMPRESS.split(',')
 //     if (compressList.includes('gzip') || compressList.includes('brotli'))

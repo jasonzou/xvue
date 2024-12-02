@@ -5,7 +5,9 @@
   last modified: 2024-12-02 10:40:13
  -------------------------------------------------------------------------->
 <script setup lang='ts'>
-import { NButton, NSpace } from 'naive-ui'
+import SvgIcon from '@/components/SvgIcon.vue'
+import { GameControllerOutline } from '@vicons/ionicons5'
+import { NButton, NIcon, NSpace } from 'naive-ui'
 </script>
 
 <template>
@@ -28,6 +30,17 @@ import { NButton, NSpace } from 'naive-ui'
         </NButton>
       </NSpace>
     </div>
+    <NSpace>
+      <NIcon size="40">
+        <GameControllerOutline />
+      </NIcon>
+      <NIcon size="40">
+        <SvgIcon name="hamburger-opened" />
+      </NIcon>
+      <NIcon size="40">
+        <SvgIcon name="mdi:home" />
+      </NIcon>
+    </NSpace>
   </div>
 </template>
 

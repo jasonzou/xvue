@@ -4,6 +4,8 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 
+// setup svg-icons
+import 'virtual:svg-icons-register'
 import 'virtual:uno.css'
 import './style.css'
 
