@@ -1,0 +1,149 @@
+{
+	"Last Modified": {
+		"prefix": "xvue-last",
+		"description": "Last modified time anddate",
+		"body": [ 
+			" $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND"
+	    ]
+	},
+	"File Header": {
+		"prefix": "xvue-header",
+		"description": "Output a file header with the file name and date",
+		"body": [
+			"<!--------------------------------------------------------------------------",
+            "  title: $TM_FILENAME",
+			"  created: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+			"  author: Jason Zou <jason.zou@gmail.com>",
+			"  last modified: ",
+			" -------------------------------------------------------------------------->"
+		]
+	},
+	"Vue SFC Setup": {
+		"prefix": "xvue",
+		"body": [
+			"<script setup lang='ts'>",
+			"\t${0}",
+			"</script>",
+			"",
+			"<template>",
+			"\t<div>",
+			"",
+			"\t</div>",
+			"</template>",
+			"",
+			"<style lang=\"css\" scoped>",
+			"",
+			"</style>"
+		],
+		"description": "Start Vue 3 File with <script setup>, No Style"
+	},
+	"Vue SFC Setup With Style CSS": {
+		"prefix": "xvue-css",
+		"body": [
+			"<script setup lang='ts'>",
+			"\t${0}",
+			"</script>",
+			"",
+			"<template>",
+			"\t<div>",
+			"",
+			"\t</div>",
+			"</template>",
+			"",
+			"<style lang=\"css\" scoped>",
+			"",
+			"</style>"
+		],
+		"description": "Start Vue 3 File with <script setup>, Style CSS"
+	},
+	"Vue SFC Setup With Style postCSS": {
+		"prefix": "xvue-pcss",
+		"body": [
+			"<script setup lang='ts'>",
+			"\t${0}",
+			"</script>",
+			"",
+			"<template>",
+			"\t<div>",
+			"",
+			"\t</div>",
+			"</template>",
+			"",
+			"<style lang=\"postcss\" scoped>",
+			"",
+			"</style>"
+		],
+		"description": "Start Vue 3 File with <script setup>, Style PostCSS"
+	},
+	"Vue Script Setup": {
+		"prefix": "vscript",
+		"body": [
+			"<script setup>",
+			"\t${0}",
+			"</script>",
+		],
+		"description": " Vue 3 <script setup>"
+	},
+	"Vue SFC Setup TypeScript": {
+		"prefix": "xvue-ts",
+		"body": [
+			"<script setup lang='ts'>",
+			"\t${0}",
+			"</script>",
+			"",
+			"<template>",
+			"\t<div>",
+			"",
+			"\t</div>",
+			"</template>"
+		],
+		"description": "Start Vue 3 File with <script setup lang='ts'>, No Style"
+	},
+	"Vue SFC Setup With Style CSS, TypeScript": {
+		"prefix": "xvue-ts-css",
+		"body": [
+			"<script setup lang='ts'>",
+			"\t${0}",
+			"</script>",
+			"",
+			"<template>",
+			"\t<div>",
+			"",
+			"\t</div>",
+			"</template>",
+			"",
+			"<style lang=\"css\" scoped>",
+			"",
+			"</style>"
+		],
+		"description": "Start Vue 3 File with <script setup lang='ts'>, Style CSS"
+	},
+	"Vue SFC Setup With Style postCSS, TypeScript": {
+		"prefix": "xvue-ts-pcss",
+		"body": [
+			"<script setup lang='ts'>",
+			"\t${0}",
+			"</script>",
+			"",
+			"<template>",
+			"\t<div>",
+			"",
+			"\t</div>",
+			"</template>",
+			"",
+			"<style lang=\"postcss\" scoped>",
+			"",
+			"</style>"
+		],
+		"description": "Start Vue 3 File with <script setup lang='ts'>, Style PostCSS"
+	},
+	"Vue Script Setup TypeScript": {
+		"prefix": "vscript-ts",
+		"body": [
+			"<script setup lang='ts'>",
+			"\t${0}",
+			"</script>"
+		],
+		"description": " Vue 3 <script setup lang='ts'>"
+	}
+}
