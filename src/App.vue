@@ -8,17 +8,19 @@
 </script>
 
 <template>
-  <div bg-amber>
-    <h1>It works. Hellow world!</h1>
-    <h2>H2 heading</h2>
-    <div text-4xl>
-      Test UnoCSS
+  <div id="container" m-4 p-4>
+    <div bg-amber>
+      <h1>It works. Hellow world!</h1>
+      <h2>H2 heading</h2>
+      <div text-4xl>
+        Test UnoCSS
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="css" scoped>
-body {
-  background-color: blanchedalmond;
+#container {
+  background-color: #ccc;
 }
 </style>
