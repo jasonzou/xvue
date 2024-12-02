@@ -30,15 +30,16 @@ import { NButton, NIcon, NSpace } from 'naive-ui'
         </NButton>
       </NSpace>
     </div>
+    <div>Three ways - icons</div>
     <NSpace>
       <NIcon size="40">
-        <GameControllerOutline />
+        <GameControllerOutline /> --vicons
       </NIcon>
       <NIcon size="40">
-        <SvgIcon name="hamburger-opened" />
+        <SvgIcon name="hamburger-opened" /> - from local svg icons
       </NIcon>
       <NIcon size="40">
-        <SvgIcon name="mdi:home" />
+        <SvgIcon name="mdi:home" />--iconify
       </NIcon>
     </NSpace>
   </div>
