@@ -15,9 +15,9 @@ import { RouterView } from 'vue-router'
       <n-notification-provider placement="bottom-right">
         <n-message-provider placement="bottom-right">
           <n-dialog-provider> -->
-            <router-view />
-            <!-- <GithubButton /> -->
-          <!-- </n-dialog-provider>
+    <RouterView />
+    <!-- <GithubButton /> -->
+    <!-- </n-dialog-provider>
         </n-message-provider>
       </n-notification-provider>
     </n-config-provider> -->
