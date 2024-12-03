@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-
+const version=import.meta.env.PACKAGE_VERSION
 defineProps<{ collapsed: boolean }>()
 
 </script>
@@ -12,7 +12,7 @@ defineProps<{ collapsed: boolean }>()
             <a href="https://github.com/jasonzou/xvue" target="_blank"> 社区 </a>
             <a href="https://github.com/jasonzou/xvue/issues" target="_blank"> 交流 </a>
         </div>
-        <div class="copyright"> &copy xvue 0.0.1 · Made by Jason Zou</div>
+        <div class="copyright"> &copy xvue {{ version }} · Made by Jason Zou</div>
     </div>
 </template>
 
