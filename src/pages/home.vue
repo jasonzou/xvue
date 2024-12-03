@@ -6,13 +6,31 @@
  -------------------------------------------------------------------------->
 <script setup lang='ts'>
 import SvgIcon from '@/components/SvgIcon.vue'
+import PageHeader from '@/components/PageHeader.vue'
 import { GameControllerOutline } from '@vicons/ionicons5'
-import { NButton, NIcon, NSpace } from 'naive-ui'
+import { NButton, NIcon, NSpace, NLayout, NLayoutSider, NLayoutHeader, NLayoutFooter, NLayoutContent } from 'naive-ui'
+import Logo from '@/components/Logo.vue'
 </script>
 
 <template>
-  <div id="container" m-4 p-4>
-    <div bg-amber>
+    <NLayout class="layout1" position="fixedMenu" has-sider>
+    <!-- 左侧区域 -->
+    <NLayoutSider>
+      <!-- logo -->
+      <Logo collapsed="collapsed" />
+      logo
+      <!-- 左侧菜单 -->
+      <AsideMenu v-modelcollapsed="collapsed" v-modellocation="getMenuLocation" />
+    </NLayoutSider>
+    <!-- 右侧区域-->
+    <NLayout>
+      <!-- header区域-->
+      <NLayoutHeader inverted="getHeaderInverted" position="fixedHeader">
+        <PageHeader v-modelcollapsed="collapsed" inverted="inverted" />
+      </NLayoutHeader>
+      <!-- 页面内容区域-->
+      <NLayoutContent>
+        <div bg-amber>
       <h1>It works. Hellow world!...</h1>
       <h2>H2 heading</h2>
       <div text-4xl>
@@ -42,7 +60,13 @@ import { NButton, NIcon, NSpace } from 'naive-ui'
         <SvgIcon name="mdi:home" />--iconify
       </NIcon>
     </NSpace>
-  </div>
+        <!-- 多标签组件-->
+        <TabsView v-if="isMultiTabs" v-model:collapsed="collapsed" />
+        <!-- 主内容组件-->
+        <MainView />
+      </NLayoutContent>
+    </NLayout>
+  </NLayout>
 </template>
 
 <style lang="css" scoped>
