@@ -10,6 +10,7 @@ import setupIcons from './icon'
 
 export default function setupVitePlugins(viteEnv: Record<string, string>, isBuild: boolean) {
   const { VITE_USE_MOCK, VITE_BUILD_COMPRESS } = viteEnv
+  console.log(viteEnv)
   const plugins: PluginOption[] =[vue(), UnoCSS()]
 
   plugins.push(setupAutoImport())
