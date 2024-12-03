@@ -13,7 +13,6 @@ export default antfu({
 {
   files: ['**/*vue'],
   rules:{
-    'vue/operator-linebreak': ['error', 'before'],
   }
 },
 { 

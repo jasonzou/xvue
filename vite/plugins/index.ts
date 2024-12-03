@@ -9,14 +9,14 @@ import setupIcons from './icon'
 // import setupCompression from './compression'
 
 export default function setupVitePlugins(viteEnv: Record<string, string>, isBuild: boolean) {
-  const { VITE_USE_MOCK, VITE_BUILD_COMPRESS } = viteEnv
+  // const { VITE_USE_MOCK, VITE_BUILD_COMPRESS } = viteEnv
   console.log(viteEnv)
   const plugins: PluginOption[] =[vue(), UnoCSS()]
 
   plugins.push(setupAutoImport())
   plugins.push(setupComponents())
   plugins.push(setupIcons())
-  plugins.push(setupSvgIcon())
+  plugins.push(setupSvgIcon(isBuild))
 //   if (isBuild) {
 //     const compressList = VITE_BUILD_COMPRESS.split(',')
 //     if (compressList.includes('gzip') || compressList.includes('brotli'))
