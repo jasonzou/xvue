@@ -1,3 +1,1 @@
-pnpm version patch
-git add .
-git push
+pnpm version patch -m "$1"
