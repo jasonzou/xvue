@@ -1,1 +1,1 @@
-npx lint-staged --allow-empty $1 && pnpm version patch && git add -A .
+npx lint-staged --allow-empty $1 
