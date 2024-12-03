@@ -13,7 +13,7 @@ import { NButton, NIcon, NSpace } from 'naive-ui'
 <template>
   <div id="container" m-4 p-4>
     <div bg-amber>
-      <h1>It works. Hellow world!</h1>
+      <h1>It works. Hellow world!...</h1>
       <h2>H2 heading</h2>
       <div text-4xl>
         Test UnoCSS
