@@ -11,17 +11,20 @@ import { NButton, NIcon, NSpace, NLayout, NLayoutSider, NLayoutHeader, NLayoutFo
 import Logo from '@/components/Logo.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import PageFooter from '@/components/PageFooter.vue'
+import SideMenu from '@/components/SideMenu.vue'
+
+const collapsed=false
 </script>
 
 <template>
   <NLayout class="layout1" position="fixedMenu" has-sider>
     <!-- 左侧区域 -->
-    <NLayoutSider>
+    <NLayoutSider bordered collapse-mode="width" :collapsed-width="64" :width="240" @collapse="collapsed=true" show-trigger="arrow-circle">
       <!-- logo -->
       <Logo collapsed="collapsed" />
       logo
       <!-- 左侧菜单 -->
-      <AsideMenu v-modelcollapsed="collapsed" v-modellocation="getMenuLocation" />
+      <SideMenu />
     </NLayoutSider>
     <!-- 右侧区域-->
     <NLayout>
@@ -30,7 +33,7 @@ import PageFooter from '@/components/PageFooter.vue'
         <PageHeader v-model:collapsed="collapsed" inverted="inverted" />
       </NLayoutHeader>
       <!-- 页面内容区域-->
-      <NLayoutContent>
+      <NLayoutContent m-2 p-2>
         <div bg-amber>
           <h1>It works. Hellow world!...</h1>
           <h2>H2 heading</h2>

@@ -2,6 +2,9 @@
 import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
 
+// define options for the component
+defineOptions({ name: 'SvgIcon', inheritAttrs: false });
+
 interface IProps {
   name: string
   prefix?: string
