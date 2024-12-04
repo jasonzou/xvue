@@ -4,8 +4,8 @@ import loginImage from '@/assets/images/logo.png';
 // .env??
 
 export default {
-  title: 'NaiveUiAdmin',
+  title: 'XVue Admin',
   logo: logoImage,
   loginImage: loginImage,
-  loginDescription: 'xvue admin'
+  loginDescription: 'XVue admin'
 } as GlobalSettings

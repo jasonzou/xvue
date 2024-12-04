@@ -1,4 +1,135 @@
 <template>
+
+
+
+
+<div class="layout-header">
+    <!--顶部菜单-->
+    <div
+      class="layout-header-left"
+      v-if="navMode === 'horizontal' || (navMode === 'horizontal-mix' && mixMenu)"
+    >
+      <div class="logo" v-if="navMode === 'horizontal'">
+        <img :src="GlobalSettings.logo" alt="" />
+        <h2 v-show="!collapsed" class="title">{{ GlobalSettings.title }}</h2>
+      </div>
+      <AsideMenu
+        :collapsed="collapsed"
+        v-model:location="getMenuLocation"
+        :inverted="getInverted"
+        mode="horizontal"
+      />
+    </div>
+    <!--左侧菜单-->
+    <div class="layout-header-left" v-else>
+      <!-- 菜单收起 -->
+      <div
+        class="ml-1 layout-header-trigger layout-header-trigger-min"
+        @click="handleMenuCollapsed"
+      >
+        <n-icon size="18" v-if="collapsed">
+          <MenuUnfoldOutlined />
+        </n-icon>
+        <n-icon size="18" v-else>
+          <MenuFoldOutlined />
+        </n-icon>
+      </div>
+      <!-- 刷新 -->
+      <div
+        class="mr-1 layout-header-trigger layout-header-trigger-min"
+        v-if="headerSetting.isReload"
+        @click="reloadPage"
+      >
+        <n-icon size="18">
+          <ReloadOutlined />
+        </n-icon>
+      </div>
+      <!-- 面包屑 -->
+      <n-breadcrumb v-if="crumbsSetting.show">
+        <template
+          v-for="routeItem in breadcrumbList"
+          :key="routeItem.name === 'Redirect' ? void 0 : routeItem.name"
+        >
+          <n-breadcrumb-item v-if="routeItem.meta.title">
+            <n-dropdown
+              v-if="routeItem.children.length"
+              :options="routeItem.children"
+              @select="dropdownSelect"
+            >
+              <span class="link-text">
+                <component
+                  v-if="crumbsSetting.showIcon && routeItem.meta.icon"
+                  :is="routeItem.meta.icon"
+                />
+                {{ routeItem.meta.title }}
+              </span>
+            </n-dropdown>
+            <span class="link-text" v-else>
+              <component
+                v-if="crumbsSetting.showIcon && routeItem.meta.icon"
+                :is="routeItem.meta.icon"
+              />
+              {{ routeItem.meta.title }}
+            </span>
+          </n-breadcrumb-item>
+        </template>
+      </n-breadcrumb>
+    </div>
+    <div class="layout-header-right">
+      <div
+        class="layout-header-trigger layout-header-trigger-min"
+        v-for="item in iconList"
+        :key="item.icon"
+      >
+        <n-tooltip placement="bottom">
+          <template #trigger>
+            <n-icon size="18">
+              <component :is="item.icon" v-on="item.eventObject || {}" />
+            </n-icon>
+          </template>
+          <span>{{ item.tips }}</span>
+        </n-tooltip>
+      </div>
+      <!--切换全屏-->
+      <div class="layout-header-trigger layout-header-trigger-min">
+        <n-tooltip placement="bottom">
+          <template #trigger>
+            <n-icon size="18">
+              <component :is="fullscreenIcon" @click="toggleFullScreen" />
+            </n-icon>
+          </template>
+          <span>全屏</span>
+        </n-tooltip>
+      </div>
+      <!-- 个人中心 -->
+      <div class="layout-header-trigger layout-header-trigger-min">
+        <n-dropdown trigger="hover" @select="avatarSelect" :options="avatarOptions">
+          <div class="avatar">
+            <n-avatar :src="GlobalSettings.logo">
+              <template #icon>
+                <UserOutlined />
+              </template>
+            </n-avatar>
+            <n-divider vertical />
+            <span>{{ username }}</span>
+          </div>
+        </n-dropdown>
+      </div>
+      <!--设置-->
+      <div class="layout-header-trigger layout-header-trigger-min" @click="openSetting">
+        <n-tooltip placement="bottom-end">
+          <template #trigger>
+            <n-icon size="18" style="font-weight: bold">
+              <SettingOutlined />
+            </n-icon>
+          </template>
+          <span>项目配置</span>
+        </n-tooltip>
+      </div>
+    </div>
+  </div>
+  <!--项目配置-->
+  <ProjectSetting ref="drawerSetting" />
     <n-page-header subtitle="A podcast to improve designs" @back="handleBack">
     <n-grid :cols="5">
       <n-gi>
@@ -55,10 +186,12 @@
 
   </template>
   
-  <script setup lang="ts">
-    import { defineComponent, reactive, toRefs, ref, computed, unref } from 'vue';
-    import { useRouter, useRoute } from 'vue-router';
-    import { NDropdown, NSpace, NIcon, NTooltip, NDivider, NAvatar, NPageHeader, NGrid, NGi, NStatistic, NBreadcrumb, NBreadcrumbItem} from 'naive-ui';
+<script setup lang="ts">
+  import { defineComponent, reactive, toRefs, ref, computed, unref } from 'vue';
+  import { useRouter, useRoute } from 'vue-router';
+  import { NDropdown, NSpace, NIcon, NTooltip, NDivider, NAvatar, NPageHeader, NGrid, NGi, NStatistic, NBreadcrumb, NBreadcrumbItem} from 'naive-ui';
+
+  import GlobalSettings from '@/GlobalSettings.ts'
 
     function openSetting(){
         console.log("Open Setting")
