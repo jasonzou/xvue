@@ -29,7 +29,7 @@ const collapsed=false
     <!-- 右侧区域-->
     <NLayout>
       <!-- header区域-->
-      <NLayoutHeader inverted="getHeaderInverted" position="fixedHeader">
+      <NLayoutHeader position="fixedHeader">
         <PageHeader v-model:collapsed="collapsed" inverted="inverted" />
       </NLayoutHeader>
       <!-- 页面内容区域-->

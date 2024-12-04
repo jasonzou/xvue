@@ -6,6 +6,6 @@ export default function setupComponents() {
     ],
     dirs: ['src/components'],
     include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],
-    dts: 'types/components.d.ts',
+    dts: 'src/types/components.d.ts',
   })
 }
