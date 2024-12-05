@@ -5,37 +5,37 @@
   last modified: 2024-12-02 10:40:13
  -------------------------------------------------------------------------->
 <script setup lang='ts'>
-import { ref } from 'vue'
-import { NConfigProvider, NDialogProvider, NMessageProvider, NNotificationProvider, NCard, NSpace, NButton} from 'naive-ui'
-import { RouterView } from 'vue-router'
 import type { GlobalTheme } from 'naive-ui'
+import { darkTheme, NButton, NCard, NConfigProvider, NDialogProvider, NMessageProvider, NNotificationProvider, NSpace } from 'naive-ui'
+import { ref } from 'vue'
 
-import { darkTheme } from 'naive-ui';
+import { RouterView } from 'vue-router'
+
 const theme = ref<GlobalTheme | null>(null)
 </script>
 
 <template>
-    <n-config-provider :theme="theme" class="" h-full>
-      <n-notification-provider placement="bottom-right">
-        <n-message-provider placement="bottom-right">
-          <n-dialog-provider>
-            <router-view/>
-            <!-- <GithubButton /> -->
-          </n-dialog-provider>
-        </n-message-provider>
-      </n-notification-provider>
-    <n-card>
-      <n-space>
-        <n-button @click="theme = darkTheme">
+  <NConfigProvider :theme="theme" class="" h-full>
+    <NNotificationProvider placement="bottom-right">
+      <NMessageProvider placement="bottom-right">
+        <NDialogProvider>
+          <RouterView />
+          <!-- <GithubButton /> -->
+        </NDialogProvider>
+      </NMessageProvider>
+    </NNotificationProvider>
+    <NCard>
+      <NSpace>
+        <NButton @click="theme = darkTheme">
           Dark
-        </n-button>
-        <n-button @click="theme = null">
+        </NButton>
+        <NButton @click="theme = null">
           Light
-        </n-button>
-      </n-space>
-    </n-card>
-    </n-config-provider>
-  </template>
+        </NButton>
+      </NSpace>
+    </NCard>
+  </NConfigProvider>
+</template>
 
 <style lang="css" scoped>
 #container {

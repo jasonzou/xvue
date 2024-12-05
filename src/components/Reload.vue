@@ -21,7 +21,7 @@ function myreload() {
 </script>
 
 <template>
-  <NIcon :size="size" @click="myreload">
+  <NIcon :size="size" @click="$router.go()">
     <SvgIcon class="cursor-pointer" name="ep:refresh" />
   </NIcon>
 </template>

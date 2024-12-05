@@ -5,7 +5,6 @@
   last modified: 2024-12-02 10:40:13
  -------------------------------------------------------------------------->
 <script setup lang='ts'>
-import Logo from '@/components/Logo.vue'
 import PageFooter from '@/components/PageFooter.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import SideMenu from '@/components/SideMenu.vue'
@@ -24,7 +23,7 @@ function toggleClick() {
 <template>
   <NLayout>
     <!-- header -->
-    <NLayoutHeader bordered h-84 p-6>
+    <NLayoutHeader bordered h-24 p-6>
       <PageHeader v-model:collapsed="collapsed" inverted="inverted" />
     </NLayoutHeader>
   </NLayout>

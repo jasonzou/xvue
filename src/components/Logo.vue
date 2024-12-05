@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<IProps>(), {
 </script>
 
 <template>
-  <div class="logo">
+  <div class="logo" whitespace-nowrap pr-5>
     <img :src="logoImage" alt="XVue logo" align-mid :class="{ 'mr-2': !props.collapsed }">
     <span mx-3 align-middle text-2xl>
       {{ GlobalSettings.title }}
@@ -26,6 +26,7 @@ const props = withDefaults(defineProps<IProps>(), {
 <style lang="css" scoped>
 .logo {
   height: 72px;
+  width: auto;
 
   img {
     width: auto;
