@@ -10,6 +10,22 @@ const router = createRouter({
     ...constantRoutes,
   ],
 })
+
+const isAuthenticated = true
+
+router.beforeEach(async (to, from, next) => {
+  // check whether it is authorized access
+  if (to.name !== 'Login' && !isAuthenticated) {
+    next({ name: 'Login' })
+  }
+  else {
+    // load menu? based on permission
+    // token
+
+    next()
+  }
+})
+
 router.afterEach((to, from) => {
   const useAppConfig = useAppConfigStore()
   const useKeepAlice = useKeepAliveStore()
