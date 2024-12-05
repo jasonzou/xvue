@@ -5,34 +5,43 @@
   last modified: 2024-12-02 10:40:13
  -------------------------------------------------------------------------->
 <script setup lang='ts'>
-import SvgIcon from '@/components/SvgIcon.vue'
-import { GameControllerOutline } from '@vicons/ionicons5'
-import { NButton, NIcon, NSpace, NLayout, NLayoutSider, NLayoutHeader, NLayoutFooter, NLayoutContent } from 'naive-ui'
 import Logo from '@/components/Logo.vue'
-import PageHeader from '@/components/PageHeader.vue'
 import PageFooter from '@/components/PageFooter.vue'
+import PageHeader from '@/components/PageHeader.vue'
 import SideMenu from '@/components/SideMenu.vue'
+import SvgIcon from '@/components/SvgIcon.vue'
+import { useAppConfigStore } from '@/stores/app'
+import { GameControllerOutline } from '@vicons/ionicons5'
+import { NButton, NIcon, NLayout, NLayoutContent, NLayoutFooter, NLayoutHeader, NLayoutSider, NSpace } from 'naive-ui'
 
-const collapsed=false
+const collapsed = false
+const useAppConfig = useAppConfigStore()
+function toggleClick() {
+  useAppConfig.appConfig.nav.subMenuCollapse = !useAppConfig.appConfig.nav.subMenuCollapse
+}
 </script>
 
 <template>
   <NLayout class="layout1" position="fixedMenu" has-sider>
     <!-- 左侧区域 -->
-    <NLayoutSider bordered collapse-mode="width" :collapsed-width="64" :width="240" @collapse="collapsed=true" show-trigger="arrow-circle">
+    <NLayoutSider
+      bordered collapse-mode="width"
+      :collapsed-width="64" :width="240"
+      show-trigger="arrow-circle" @collapse="toggleClick"
+    >
       <!-- logo -->
-      <Logo collapsed="collapsed" />
+      <Logo :collapsed="collapsed" />
       logo
       <!-- 左侧菜单 -->
       <SideMenu />
     </NLayoutSider>
-    <!-- 右侧区域-->
+    <!-- 右侧区域 -->
     <NLayout>
-      <!-- header区域-->
+      <!-- header区域 -->
       <NLayoutHeader position="fixedHeader">
         <PageHeader v-model:collapsed="collapsed" inverted="inverted" />
       </NLayoutHeader>
-      <!-- 页面内容区域-->
+      <!-- 页面内容区域 -->
       <NLayoutContent m-2 p-2>
         <div bg-amber>
           <h1>It works. Hellow world!...</h1>
@@ -64,14 +73,14 @@ const collapsed=false
             <SvgIcon name="mdi:home" />--iconify
           </NIcon>
         </NSpace>
-        <!-- 多标签组件-->
+        <!-- 多标签组件 -->
         <TabsView v-if="isMultiTabs" v-model:collapsed="collapsed" />
-        <!-- 主内容组件-->
+        <!-- 主内容组件 -->
         <MainView />
       </NLayoutContent>
-      <n-layout-footer>
+      <NLayoutFooter>
         <PageFooter />
-      </n-layout-footer>
+      </NLayoutFooter>
     </NLayout>
   </NLayout>
 </template>

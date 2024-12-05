@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import { computed, defineComponent, onMounted, reactive, ref, toRefs, unref, watch } from 'vue'
-import type { Component } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { NMenu, NSpace, NSwitch, NLayoutSider } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
+import { useAppConfigStore } from '@/stores/app'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
-  WineOutline as WineIcon
+  WineOutline as WineIcon,
 } from '@vicons/ionicons5'
-import { NIcon } from 'naive-ui'
-import { h } from 'vue'
+import { NIcon, NLayoutSider, NMenu, NSpace, NSwitch } from 'naive-ui'
+import { computed, defineComponent, h, onMounted, reactive, ref, toRefs, unref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const props = withDefaults(defineProps<IProps>(), {
+  collapsed: false,
+  mode: 'vertical',
+  location: 'left',
+})
+
+const useAppConfig = useAppConfigStore()
+
+// props.collapsed = useAppConfig.appConfig.nav.subMenuCollapse
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
@@ -21,17 +29,11 @@ interface IProps {
   collapsed: boolean // 侧边栏菜单是否收起
   location: string // 位置
 }
-const props = withDefaults(defineProps<IProps>(), {
-  collapsed: false,
-  mode: 'vertical',
-  location: 'left'
-})
-
 const menuOptions: MenuOption[] = [
   {
     label: 'Hear the Wind Sing',
     key: 'hear-the-wind-sing',
-    icon: renderIcon(BookIcon)
+    icon: renderIcon(BookIcon),
   },
   {
     label: 'Pinball 1973',
@@ -41,15 +43,15 @@ const menuOptions: MenuOption[] = [
     children: [
       {
         label: 'Rat',
-        key: 'rat'
-      }
-    ]
+        key: 'rat',
+      },
+    ],
   },
   {
     label: 'A Wild Sheep Chase',
     key: 'a-wild-sheep-chase',
     disabled: true,
-    icon: renderIcon(BookIcon)
+    icon: renderIcon(BookIcon),
   },
   {
     label: 'Dance Dance Dance',
@@ -64,14 +66,14 @@ const menuOptions: MenuOption[] = [
           {
             label: 'Narrator',
             key: 'narrator',
-            icon: renderIcon(PersonIcon)
+            icon: renderIcon(PersonIcon),
           },
           {
             label: 'Sheep Man',
             key: 'sheep-man',
-            icon: renderIcon(PersonIcon)
-          }
-        ]
+            icon: renderIcon(PersonIcon),
+          },
+        ],
       },
       {
         label: 'Beverage',
@@ -80,9 +82,9 @@ const menuOptions: MenuOption[] = [
         children: [
           {
             label: 'Whisky',
-            key: 'whisky'
-          }
-        ]
+            key: 'whisky',
+          },
+        ],
       },
       {
         label: 'Food',
@@ -90,43 +92,38 @@ const menuOptions: MenuOption[] = [
         children: [
           {
             label: 'Sandwich',
-            key: 'sandwich'
-          }
-        ]
+            key: 'sandwich',
+          },
+        ],
       },
       {
         label: 'The past increases. The future recedes.',
-        key: 'the-past-increases-the-future-recedes'
-      }
-    ]
-  }
+        key: 'the-past-increases-the-future-recedes',
+      },
+    ],
+  },
 ]
-const inverted=false
-const openKeys=[]
 
-function getSelectedKeys(){
+function getSelectedKeys() {
   console.log('get selected keys')
   return null
 }
-function clickMenuItem(){
+function clickMenuItem() {
   console.log('clicked menu item')
 }
 
-function menuExpanded(){
+function menuExpanded() {
   console.log('menu expanded')
 }
 </script>
 
 <template>
-  <n-menu
-    :options="menuOptions" 
-    :inverted="inverted" 
-    :mode="props.mode" 
-    :collapsed="props.collapsed" 
+  <NMenu
+    :options="menuOptions"
     :collapsed-width="64"
-    :collapsed-icon-size="20" 
-    :indent="24" 
-    @update:value="clickMenuItem" 
+    :collapsed-icon-size="20"
+    :indent="24"
+    @update:value="clickMenuItem"
     @update:expanded-keys="menuExpanded"
   />
 </template>

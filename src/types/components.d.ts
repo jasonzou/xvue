@@ -13,6 +13,7 @@ declare module 'vue' {
     PageHeader: typeof import('./../components/PageHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SideBarCollapse: typeof import('./../components/SideBarCollapse.vue')['default']
     SideMenu: typeof import('./../components/SideMenu.vue')['default']
     SvgIcon: typeof import('./../components/SvgIcon.vue')['default']
   }
