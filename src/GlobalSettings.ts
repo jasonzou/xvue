@@ -8,7 +8,7 @@ export const GlobalSettings: IGlobalConfig = {
   loginDescription: 'XVue admin',
 
   // 默认语言. zh-cn: 简体中文 zh-tw: 繁体中文 en: 英文
-  defaultLanguage: 'zh-cn',
+  defaultLanguage: 'en',
   /**
    * Element 组件尺寸
    * 这里有和主内容区默认文字大小关联

@@ -16,30 +16,20 @@ const props = withDefaults(defineProps<IProps>(), {
 
 <template>
   <div class="logo">
-    <img :src="logoImage" alt="" :class="{ 'mr-2': !props.collapsed }">
-    <h2 v-show="!props.collapsed" class="title">
+    <img :src="logoImage" alt="XVue logo" align-mid :class="{ 'mr-2': !props.collapsed }">
+    <span mx-3 align-middle text-2xl>
       {{ GlobalSettings.title }}
-    </h2>
+    </span>
   </div>
 </template>
 
 <style lang="css" scoped>
 .logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-  line-height: 64px;
-  overflow: hidden;
-  white-space: nowrap;
+  height: 72px;
 
   img {
     width: auto;
-    height: 32px;
-  }
-
-  .title {
-    margin: 0;
+    height: 56px;
   }
 }
 </style>

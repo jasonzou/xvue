@@ -1,12 +1,22 @@
 <script setup lang="ts">
+import type { MenuOption } from 'naive-ui'
+import ChangeColorScheme from '@/components/ChangeColorScheme.vue'
+import FullScreen from '@/components/FullScreen.vue'
+import LangSelect from '@/components/LangSelect.vue'
+import Logo from '@/components/Logo.vue'
+import Reload from '@/components/Reload.vue'
 import SideBarCollapse from '@/components/SideBarCollapse.vue'
 import SvgIcon from '@/components/SvgIcon.vue'
 import { GlobalSettings } from '@/GlobalSettings'
-
 import { useAppConfigStore } from '@/stores/app'
-import { NAvatar, NBreadcrumb, NBreadcrumbItem, NDivider, NDropdown, NGi, NGrid, NIcon, NPageHeader, NSpace, NStatistic, NTooltip } from 'naive-ui'
-import { computed, defineComponent, reactive, ref, toRefs, unref } from 'vue'
+import {
+  BookOutline as BookIcon,
+  PersonOutline as PersonIcon,
+  WineOutline as WineIcon,
+} from '@vicons/ionicons5'
 
+import { NAvatar, NBreadcrumb, NBreadcrumbItem, NDivider, NDropdown, NGi, NGrid, NIcon, NMenu, NPageHeader, NSpace, NSplit, NStatistic, NTooltip } from 'naive-ui'
+import { computed, defineComponent, h, reactive, ref, toRefs, unref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const useAppConfig = useAppConfigStore()
@@ -20,356 +30,115 @@ function openSetting() {
 const collapsed = false
 const inverted = false
 const navMode = 'horizontal'
+function renderIcon(icon: Component) {
+  return () => h(NIcon, null, { default: () => h(icon) })
+}
 
-// import components from './components';
-// import { NDialogProvider, useDialog, useMessage } from 'naive-ui';
-// import { TABS_ROUTES } from '@/store/mutation-types';
-// import { useUserStore } from '@/store/modules/user';
-// import { useScreenLockStore } from '@/store/modules/screenLock';
-// import ProjectSetting from './ProjectSetting.vue';
-// import { AsideMenu } from '@/layout/components/Menu';
-// import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
-// import { websiteConfig } from '@/config/website.config';
-
-// export default defineComponent({
-//   name: 'PageHeader',
-//   components: { ...components, NDialogProvider, ProjectSetting, AsideMenu },
-//   props: {
-//     collapsed: {
-//       type: Boolean,
-//     },
-//     inverted: {
-//       type: Boolean,
-//     },
-//   },
-//   emits: ['update:collapsed'],
-//   setup(props, { emit }) {
-//     const userStore = useUserStore();
-//     const useLockscreen = useScreenLockStore();
-//     const message = useMessage();
-//     const dialog = useDialog();
-//     const { navMode, navTheme, headerSetting, menuSetting, crumbsSetting } = useProjectSetting();
-
-//     const drawerSetting = ref();
-
-//     const state = reactive({
-//       username: userStore?.info?.username ?? '',
-//       fullscreenIcon: 'FullscreenOutlined',
-//       navMode,
-//       navTheme,
-//       headerSetting,
-//       crumbsSetting,
-//     });
-
-//     const getInverted = computed(() => {
-//       return ['light', 'header-dark'].includes(unref(navTheme))
-//         ? props.inverted
-//         : !props.inverted;
-//     });
-
-//     const mixMenu = computed(() => {
-//       return unref(menuSetting).mixMenu;
-//     });
-
-//     const getChangeStyle = computed(() => {
-//       const { collapsed } = props;
-//       const { minMenuWidth, menuWidth } = unref(menuSetting);
-//       return {
-//         left: collapsed ? `${minMenuWidth}px` : `${menuWidth}px`,
-//         width: `calc(100% - ${collapsed ? `${minMenuWidth}px` : `${menuWidth}px`})`,
-//       };
-//     });
-
-//     const getMenuLocation = computed(() => {
-//       return 'header';
-//     });
-
-//     const router = useRouter();
-//     const route = useRoute();
-
-//     const generator: any = (routerMap) => {
-//       return routerMap.map((item) => {
-//         const currentMenu = {
-//           ...item,
-//           label: item.meta.title,
-//           key: item.name,
-//           disabled: item.path === '/',
-//         };
-//         // 是否有子菜单，并递归处理
-//         if (item.children && item.children.length > 0) {
-//           // Recursion
-//           currentMenu.children = generator(item.children, currentMenu);
-//         }
-//         return currentMenu;
-//       });
-//     };
-
-//     const breadcrumbList = computed(() => {
-//       return generator(route.matched);
-//     });
-
-//     const dropdownSelect = (key) => {
-//       router.push({ name: key });
-//     };
-
-//     // 刷新页面
-//     const reloadPage = () => {
-//       router.push({
-//         path: '/redirect' + unref(route).fullPath,
-//       });
-//     };
-
-//     // 退出登录
-//     const doLogout = () => {
-//       dialog.info({
-//         title: '提示',
-//         content: '您确定要退出登录吗',
-//         positiveText: '确定',
-//         negativeText: '取消',
-//         onPositiveClick: () => {
-//           userStore.logout().then(() => {
-//             message.success('成功退出登录');
-//             // 移除标签页
-//             localStorage.removeItem(TABS_ROUTES);
-//             router
-//               .replace({
-//                 name: 'Login',
-//                 query: {
-//                   redirect: route.fullPath,
-//                 },
-//               })
-//               .finally(() => location.reload());
-//           });
-//         },
-//         onNegativeClick: () => {},
-//       });
-//     };
-
-//     // 切换全屏图标
-//     const toggleFullscreenIcon = () =>
-//       (state.fullscreenIcon =
-//         document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined');
-
-//     // 监听全屏切换事件
-//     document.addEventListener('fullscreenchange', toggleFullscreenIcon);
-
-//     // 全屏切换
-//     const toggleFullScreen = () => {
-//       if (!document.fullscreenElement) {
-//         document.documentElement.requestFullscreen();
-//       } else {
-//         if (document.exitFullscreen) {
-//           document.exitFullscreen();
-//         }
-//       }
-//     };
-
-//     // 图标列表
-//     const iconList = [
-//       {
-//         icon: 'SearchOutlined',
-//         tips: '搜索',
-//       },
-//       {
-//         icon: 'GithubOutlined',
-//         tips: 'github',
-//         eventObject: {
-//           click: () => window.open('https://github.com/jekip/naive-ui-admin'),
-//         },
-//       },
-//       {
-//         icon: 'LockOutlined',
-//         tips: '锁屏',
-//         eventObject: {
-//           click: () => useLockscreen.setLock(true),
-//         },
-//       },
-//     ];
-//     const avatarOptions = [
-//       {
-//         label: '个人设置',
-//         key: 1,
-//       },
-//       {
-//         label: '退出登录',
-//         key: 2,
-//       },
-//     ];
-
-//     //头像下拉菜单
-//     const avatarSelect = (key) => {
-//       switch (key) {
-//         case 1:
-//           router.push({ name: 'Setting' });
-//           break;
-//         case 2:
-//           doLogout();
-//           break;
-//       }
-//     };
-
-//     function openSetting() {
-//       const { openDrawer } = drawerSetting.value;
-//       openDrawer();
-//     }
-
-//     return {
-//       ...toRefs(state),
-//       iconList,
-//       toggleFullScreen,
-//       doLogout,
-//       route,
-//       dropdownSelect,
-//       avatarOptions,
-//       getChangeStyle,
-//       avatarSelect,
-//       breadcrumbList,
-//       reloadPage,
-//       drawerSetting,
-//       openSetting,
-//       getInverted,
-//       getMenuLocation,
-//       mixMenu,
-//       websiteConfig,
-//       handleMenuCollapsed,
-//     };
-//   },
-// });
+const hmenuOptions: MenuOption[] = [
+  {
+    label: () =>
+      h(
+        'a',
+        {
+          href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
+          target: '_blank',
+          rel: 'noopenner noreferrer',
+        },
+        '且听风吟',
+      ),
+    key: 'hear-the-wind-sing',
+    icon: renderIcon(BookIcon),
+  },
+  {
+    label: '1973年的弹珠玩具',
+    key: 'pinball-1973',
+    icon: renderIcon(BookIcon),
+    disabled: true,
+    children: [
+      {
+        label: '鼠',
+        key: 'rat',
+      },
+    ],
+  },
+  {
+    label: '寻羊冒险记',
+    key: 'a-wild-sheep-chase',
+    icon: renderIcon(BookIcon),
+    disabled: true,
+  },
+  {
+    label: '舞，舞，舞',
+    key: 'dance-dance-dance',
+    icon: renderIcon(BookIcon),
+    children: [
+      {
+        type: 'group',
+        label: '人物',
+        key: 'people',
+        children: [
+          {
+            label: '叙事者',
+            key: 'narrator',
+            icon: renderIcon(PersonIcon),
+          },
+          {
+            label: '羊男',
+            key: 'sheep-man',
+            icon: renderIcon(PersonIcon),
+          },
+        ],
+      },
+      {
+        label: '饮品',
+        key: 'beverage',
+        icon: renderIcon(WineIcon),
+        children: [
+          {
+            label: '威士忌',
+            key: 'whisky',
+          },
+        ],
+      },
+      {
+        label: '食物',
+        key: 'food',
+        children: [
+          {
+            label: '三明治',
+            key: 'sandwich',
+          },
+        ],
+      },
+      {
+        label: '过去增多，未来减少',
+        key: 'the-past-increases-the-future-recedes',
+      },
+    ],
+  },
+]
 </script>
 
 <template>
   <div class="layout-header">
-    <!-- 顶部菜单 -->
-
-    <!-- 左侧菜单 -->
-    <div class="layout-header-left">
-      <!-- 菜单收起 -->
-      <div class="layout-header-trigger layout-header-trigger-min ml-1" @click="handleMenuCollapsed">
-        <SideBarCollapse v-if="useAppConfig.appConfig.toolbar.enableSidebarCollapse" class="mr-2" />
+    <!-- logo -->
+    <div class="toolbar-content h-[var(--xt-toolbar-height)] flex items-center px-4">
+      <div class="flex items-center">
+        <Logo />
+        <NMenu mode="horizontal" :options="hmenuOptions" responsive />
       </div>
-      <!-- 刷新 -->
-      <div class="layout-header-trigger layout-header-trigger-min mr-1" @click="reloadPage">
-        <NIcon size="18">
-          <ReloadOutlined />
-        </NIcon>
-      </div>
-      <!-- 面包屑 -->
-      <NBreadcrumb>
-        <template v-for="routeItem in breadcrumbList" :key="routeItem.name === 'Redirect' ? void 0 : routeItem.name">
-          <NBreadcrumbItem v-if="routeItem.meta.title">
-            <NDropdown v-if="routeItem.children.length" :options="routeItem.children" @select="dropdownSelect">
-              <span class="link-text">
-                <component :is="routeItem.meta.icon" v-if="crumbsSetting.showIcon && routeItem.meta.icon" />
-                {{ routeItem.meta.title }}
-              </span>
-            </NDropdown>
-            <span v-else class="link-text">
-              <component :is="routeItem.meta.icon" v-if="crumbsSetting.showIcon && routeItem.meta.icon" />
-              {{ routeItem.meta.title }}
-            </span>
-          </NBreadcrumbItem>
-        </template>
-      </NBreadcrumb>
-    </div>
-    <div class="layout-header-right">
-      <div v-for="item in iconList" :key="item.icon" class="layout-header-trigger layout-header-trigger-min">
-        <NTooltip placement="bottom">
-          <template #trigger>
-            <NIcon size="18">
-              <component :is="item.icon" v-on="item.eventObject || {}" />
-            </NIcon>
-          </template>
-          <span>{{ item.tips }}</span>
-        </NTooltip>
-      </div>
-      <!-- 切换全屏 -->
-      <div class="layout-header-trigger layout-header-trigger-min">
-        <NTooltip placement="bottom">
-          <template #trigger>
-            <NIcon size="18">
-              <component :is="fullscreenIcon" @click="toggleFullScreen" />
-            </NIcon>
-          </template>
-          <span>全屏</span>
-        </NTooltip>
-      </div>
-      <!-- 个人中心 -->
-      <div class="layout-header-trigger layout-header-trigger-min">
-        <NDropdown trigger="hover" :options="avatarOptions" @select="avatarSelect">
-          <div class="avatar">
-            <NAvatar :src="GlobalSettings.logo">
-              <template #icon>
-                <UserOutlined />
-              </template>
-            </NAvatar>
-            <NDivider vertical />
-            <span>{{ username }}</span>
-          </div>
-        </NDropdown>
-      </div>
-      <!-- 设置 -->
-      <div class="layout-header-trigger layout-header-trigger-min" @click="openSetting">
-        <NTooltip placement="bottom-end">
-          <template #trigger>
-            <NIcon size="18" style="font-weight: bold">
-              <SettingOutlined />
-            </NIcon>
-          </template>
-          <span>项目配置</span>
-        </NTooltip>
+      <div class="ml-auto flex items-center">
+        <!-- <MenuSearch v-if="useAppConfig.appConfig.toolbar.enableMenuSearch" class="mr-2" /> -->
+        <ChangeSize v-if="useAppConfig.appConfig.toolbar.enableElementSize" class="mr-2" :size="24" />
+        <Reload v-if="useAppConfig.appConfig.toolbar.enablePageReload" class="mr-2" :size="24" />
+        <LangSelect v-if="useAppConfig.appConfig.toolbar.enableI18n" class="mr-2" :size="24" />
+        <FullScreen v-if="useAppConfig.appConfig.toolbar.enableFullscreen" class="mr-2" :size="24" />
+        <ChangeColorScheme v-if="useAppConfig.appConfig.toolbar.enableColorScheme" class="mr-2" :size="24" />
+        <!-- <ThemeSelect v-if="useAppConfig.appConfig.toolbar.enableChangeTheme" class="mr-2" /> -->
+        <Personal />
       </div>
     </div>
   </div>
-  <!-- 项目配置 -->
-  <ProjectSetting ref="drawerSetting" />
-  <NPageHeader subtitle="A podcast to improve designs" @back="handleBack">
-    <NGrid :cols="5">
-      <NGi>
-        <NStatistic label="Episodes" value="125" />
-      </NGi>
-      <NGi>
-        <NStatistic label="Guests" value="22" />
-      </NGi>
-      <NGi>
-        <NStatistic label="Apologies" value="36" />
-      </NGi>
-      <NGi>
-        <NStatistic label="Topics" value="83" />
-      </NGi>
-      <NGi>
-        <NStatistic label="Reference Links" value="2,346" />
-      </NGi>
-    </NGrid>
-    <template #title>
-      <a href="https://anyway.fm/" style="text-decoration: none; color: inherit">
-        Anyway.FM
-      </a>
-    </template>
-    <template #header>
-      <NBreadcrumb>
-        <NBreadcrumbItem>Podcast</NBreadcrumbItem>
-        <NBreadcrumbItem>Best Collection</NBreadcrumbItem>
-        <NBreadcrumbItem>Ultimate Best Collection</NBreadcrumbItem>
-        <NBreadcrumbItem>Anyway.FM</NBreadcrumbItem>
-      </NBreadcrumb>
-    </template>
-    <template #avatar>
-      <NAvatar src="https://cdnimg103.lizhi.fm/user/2017/02/04/2583325032200238082_160x160.jpg" />
-    </template>
-    <template #extra>
-      <NSpace>
-        <n-button>Refresh</n-button>
-        <NDropdown :options="options" placement="bottom-start">
-          <n-button :bordered="false" style="padding: 0 4px">
-            ···
-          </n-button>
-        </NDropdown>
-      </NSpace>
-    </template>
-    <template #footer>
-      As of April 3, 2021
-    </template>
-  </NPageHeader>
 </template>
 
   <style lang="css" scoped>

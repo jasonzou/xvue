@@ -22,6 +22,12 @@ function toggleClick() {
 </script>
 
 <template>
+  <NLayout>
+    <!-- header -->
+    <NLayoutHeader bordered h-84 p-6>
+      <PageHeader v-model:collapsed="collapsed" inverted="inverted" />
+    </NLayoutHeader>
+  </NLayout>
   <NLayout class="layout1" position="fixedMenu" has-sider>
     <!-- 左侧区域 -->
     <NLayoutSider
@@ -29,18 +35,11 @@ function toggleClick() {
       :collapsed-width="64" :width="240"
       show-trigger="arrow-circle" @collapse="toggleClick"
     >
-      <!-- logo -->
-      <Logo :collapsed="collapsed" />
-      logo
       <!-- 左侧菜单 -->
       <SideMenu />
     </NLayoutSider>
     <!-- 右侧区域 -->
     <NLayout>
-      <!-- header区域 -->
-      <NLayoutHeader position="fixedHeader">
-        <PageHeader v-model:collapsed="collapsed" inverted="inverted" />
-      </NLayoutHeader>
       <!-- 页面内容区域 -->
       <NLayoutContent m-2 p-2>
         <div bg-amber>

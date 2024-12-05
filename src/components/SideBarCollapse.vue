@@ -24,7 +24,6 @@ function toggleClick() {
 
 <template>
   <NIcon :size="size" @click="toggleClick">
-    hello
     <SvgIcon :name="useAppConfig.getCollapse ? 'hamburger-opened' : 'hamburger-closed'" class="cursor-pointer" />
   </NIcon>
 </template>
