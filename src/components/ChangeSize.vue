@@ -21,7 +21,9 @@ const useAppConfig = useAppConfigStore()
 const elementSize = computed(() => useAppConfig.appConfig.elementSize)
 
 function changeSize(value: ElementSize) {
-  useAppConfig.appConfig.elementSize = value
+  if (elementSize.value !== value) {
+    useAppConfig.appConfig.elementSize = value
+  }
 }
 
 function handleSelect(key: string | number) {

@@ -24,8 +24,10 @@ const language = computed(() => useAppConfig.getLanguage)
 
 const i18n = useI18n()
 function handleSetLanguage(lang: Language) {
-  i18n.locale.value = lang
-  useAppConfig.appConfig.defaultLanguage = lang
+  if (language.value !== lang) {
+    i18n.locale.value = lang
+    useAppConfig.appConfig.defaultLanguage = lang
+  }
 }
 
 const options = [
