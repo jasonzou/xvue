@@ -1,21 +1,18 @@
 import router from '@/router'
 import axios from 'axios'
-import { useMessage } from 'naive-ui'
 
 import apiUrl from './api'
-
-const message = useMessage()
 
 // create an axios instance
 const axiosInstance = axios.create({
   baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
   },
 })
-
+console.log("---------- handle.ts ---------")
 console.log(apiUrl)
+console.log("---------- handle.ts --------- end")
 
 // http request interceptor for axios
 axiosInstance.interceptors.request.use(
@@ -38,7 +35,8 @@ axiosInstance.interceptors.request.use(
 // http response interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
-    response.headers['Access-Control-Allow-Origin'] = '*'
+    // response.headers['Access-Control-Allow-Origin'] = '*'
+    console.log("interceptor ==> ", response)
     return response
   },
   (error) => {
@@ -59,7 +57,6 @@ axiosInstance.interceptors.response.use(
       switch (Err_Status) {
         case 400:
         case 401:
-          message.warning(ErrData)
           // redirect to the login page
           console.log('redirect')
           router.push({ name: 'login' })

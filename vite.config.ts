@@ -14,6 +14,17 @@ export default defineConfig(({ command, mode }) => {
     },
     define: {
       'import.meta.env.PACKAGE_VERSION': JSON.stringify(packageJson.version)  
-    }
+    },
+    server: {
+      port: 3000,
+      cors: true,
+      // proxy: {
+      //   '/user/login': 
+      //   {
+      //     target: env.VITE_APP_API_BASEURL,
+      //     changeOrigin: true,
+      //   },
+      // },
+    },
   }
 })

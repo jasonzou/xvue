@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import Header from "@/components/common/Header.vue";
-import { ezHeaderStore } from "@/stores/header";
+// import Header from "@/components/c/Header.vue";
+// import { ezHeaderStore } from "@/stores/header";
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
-import { ElNotification } from "element-plus";
 
 const headerStore = ezHeaderStore();
 const { header } = storeToRefs(headerStore);

@@ -62,7 +62,6 @@ export const ezUserStore = defineStore('ezUserStore', {
         headers: {
           'Authorization': `Bearer ${bearer_token}`,
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
         },
       }
 
@@ -72,7 +71,7 @@ export const ezUserStore = defineStore('ezUserStore', {
       }
       console.log(bodyParameters, config)
 
-      return axiosInstance.post('/user/login', bodyParameters, config).then(console.log).catch(console.log)
+      return axiosInstance.post('/user/login', bodyParameters, config)
     },
     logout() {
       localStorage.clear()

@@ -19,6 +19,8 @@ function login() {
   store
     .login(username.value, password.value)
     .then((response) => {
+      console.log("response ===>")
+      console.log(response)
       if (response.data.token) {
         store.token = response.data.token
         store.$patch({
