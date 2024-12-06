@@ -6,6 +6,7 @@ export const GlobalSettings: IGlobalConfig = {
   APP_CONFIG: 'app_config',
   title: 'XVue Admin',
   loginDescription: 'XVue admin',
+  token: import.meta.env.VITE_BEARER_TOKEN,
 
   // 默认语言. zh-cn: 简体中文 zh-tw: 繁体中文 en: 英文
   defaultLanguage: 'en',

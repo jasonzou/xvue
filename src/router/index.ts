@@ -3,6 +3,9 @@ import { useKeepAliveStore } from '@/stores/keepAlive'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import constantRoutes from './constant'
 
+// whitelist urls
+const whiteList = ['/login']
+
 // create a router
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

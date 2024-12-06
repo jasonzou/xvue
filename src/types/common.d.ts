@@ -73,6 +73,7 @@ declare interface IGlobalConfig {
   APP_CONFIG: string
   title: string
   loginDescription: string
+  token: string
   defaultLanguage: Language
   elementSize: ElementSize
   app: IGlobalApp
